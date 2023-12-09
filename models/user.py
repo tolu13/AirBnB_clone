@@ -2,7 +2,7 @@
 """This modue creates a classn(user)"""
 from models.base_model import BaseModel
 
-class user(BaseModel):
+class User(BaseModel):
     """This is a user class tHAT INHERITS FROM THE PArent class"""
 
 
