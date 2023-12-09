@@ -23,13 +23,32 @@ class FileStorage:
 		serialized_obj = {key: obj.to_dict() for key, obj in FileStorage.__objects.items()}
 		with open (self.__file_path, 'w', encoding='utf-8' ) as file:
 			json.dump(serialized_obj, file)
+
+	def classes(self):
+                """This returns the dictionary representation of  class attributes"""
+                from models.base_model import BaseModel
+                from models.user import User
+                from models.state import State
+                from models.city import City
+                from models.amenity import Amenity
+                from models.review import Review
+                from models.place import Place
+
+                classes = {"BaseModel": BaseModel,
+                           "User": User,
+                           "State": State,
+                           "City": City,
+                           "Amenity": Amenity,
+                           "Review": Review,
+                           "Placd": Place}
+                return classes 
 	def reload(self):
-        """This reloads the stored objects"""
-        if not os.path.isfile(FileStorage.__file_path):
-            return
-        with open(FileStorage.__file_path, "r", encoding="utf-8") as file:
-            obj_dict = json.load(f)
-            obj_dict = {key: self.classes()[value["__class__"]](**value)
-                        for key, value in obj_dict.items()}
-            # TODO: should this overwrite or insert?
-            FileStorage.__objects = obj_dict#!
+	        """This reloads the stored objects"""
+	        if not os.path.isfile(FileStorage.__file_path):
+                   return
+	        with open(FileStorage.__file_path, "r", encoding="utf-8") as file:
+                    obj_dict = json.load(file)
+                    obj_dict = {key: self.classes()[value["__class__"]](**value)
+                                for key, value in obj_dict.items()}
+                    # TODO: should this overwrite or insert?
+                    FileStorage.__objects = obj_dict#!
