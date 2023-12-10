@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 """This is the module for the entry point of the command interpreter"""
-# h
-
 import cmd
 from models.base_model import BaseModel
 from models import storage
@@ -9,21 +7,17 @@ import re
 import json
 
 
-
 class HBNBCommand(cmd.Cmd):
     """This is the command interpreter for the AirBnb clone Project"""
 
     prompt = "(hbnb) "
 
-
     def default(self, arg):
         """Catch commands if nothing else matches then."""
-        # print("DEF:::", arg)
         self._precmd(arg)
 
     def _precmd(self, arg):
         """Intercepts commands to test for class.syntax()"""
-        # print("PRECMD:::", arg)
         match = re.search(r"^(\w*)\.(\w+)(?:\(([^)]*)\))$", arg)
         if not match:
             return arg
@@ -47,9 +41,12 @@ class HBNBCommand(cmd.Cmd):
             match_attr_and_value = re.search(
                 '^(?:"([^"]*)")?(?:, (.*))?$', attr_or_dict)
             if match_attr_and_value:
-                attr_and_value = (match_attr_and_value.group(
-                    1) or "") + " " + (match_attr_and_value.group(2) or "")
-        command = method + " " + classname + " " + uid + " " + attr_and_value
+                attr_and_value = (
+                    match_attr_and_value.group(1) or "") + " " + (
+                        match_attr_and_value.group(2) or "")
+        command = (
+            method + " " + classname + " " + uid + " " + attr_and_value
+        )
         self.onecmd(command)
         return command
 
@@ -75,10 +72,8 @@ class HBNBCommand(cmd.Cmd):
                     setattr(storage.all()[key], attribute, value)
                 storage.all()[key].save()
 
-
     def do_count(self, arg):
-        """This counts the instances of a class.
-        """
+        """This counts the instances of a class."""
         words = arg.split(' ')
         if not words[0]:
             print("** class name missing **")
@@ -93,19 +88,20 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Do nothing on an empty line."""
         pass
+
     def do_create(self, arg):
-        """This creates a new instance"""
+        """This creates a new instance."""
         if arg == "" or arg is None:
             print("** class name missing **")
         elif arg not in storage.classes():
-              print("** class doesn't exist **" )
+            print("** class doesn't exist **")
         else:
             b = storage.classes()[arg]()
             b.save()
             print(b.id)
 
     def do_show(self, arg):
-        """this prints the string representation of instance"""
+        """This prints the string representation of instance."""
         if arg == "" or arg is None:
             print("** class name missing **")
         else:
@@ -119,12 +115,10 @@ class HBNBCommand(cmd.Cmd):
                 if key not in storage.all():
                     print("** no instance found **")
                 else:
-                     print(storage.all()[key])
-
+                    print(storage.all()[key])
 
     def do_destroy(self, arg):
-        """This Deletes an instance based on the class name and id"""
-
+        """This Deletes an instance based on the class name and id."""
         if arg == "" or arg is None:
             print("** class name missing")
         else:
@@ -142,7 +136,7 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
 
     def do_all(self, arg):
-        """This  Prints all string representation of all instances based or not on the class name."""
+        """This Prints all string representation of all instance"""
         if arg != "":
             words = arg.split(' ')
             if words[0] not in storage.classes():
@@ -155,9 +149,8 @@ class HBNBCommand(cmd.Cmd):
             new_list = [str(obj) for key, obj in storage.all().items()]
             print(new_list)
 
-
     def do_update(self, arg):
-        """This Updates an instance based on the class name and id by adding or updating attribute"""
+        """This Updates an instance based on the class name and id """
         if arg == "" or arg is None:
             print("** class name missing **")
             return
@@ -211,7 +204,6 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
 
-
     def help_quit(self):
         """Print help message for quit command."""
         print("Quit the program")
@@ -219,6 +211,7 @@ class HBNBCommand(cmd.Cmd):
     def help_EOF(self):
         """Print help message for EOF command."""
         print("Exit the program on EOF")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
