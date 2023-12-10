@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This module creates a state clas that inherits from parent class BASEMODEL"""
+"""This module creates state clas that inherit from parent class BASEMODEL"""
 
 from models.base_model import BaseModel
 

@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""This modue creates a classn(user)"""
+"""This module creates a class (User)"""
 from models.base_model import BaseModel
 
-class User(BaseModel):
-    """This is a user class tHAT INHERITS FROM THE PArent class"""
 
+class User(BaseModel):
+    """This is a User class that inherits from the parent class"""
 
     email = ""
     password = ""

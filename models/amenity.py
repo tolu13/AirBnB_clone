@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-"""This class inherit from the parent class Basemodel"""
+"""This class inherits from the parent class BaseModel"""
 from models.base_model import BaseModel
 
-class Amenity(BaseModel):
-	"""This is the class amenity"""
 
-	name = ""
+class Amenity(BaseModel):
+    """This is the Amenity class"""
+
+    name = ""

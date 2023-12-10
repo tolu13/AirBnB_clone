@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This module creates a User city class that inherits from parent class BASEMODEl"""
+"""This module creates User class that inherits from parent class BASEMODEl"""
 
 from models.base_model import BaseModel
 
