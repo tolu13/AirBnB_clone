@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """This is the module for the entry point of the command interpreter"""
+# h
 
 import cmd
 from models.base_model import BaseModel
@@ -75,7 +76,19 @@ class HBNBCommand(cmd.Cmd):
                 storage.all()[key].save()
 
 
-
+    def do_count(self, arg):
+        """This counts the instances of a class.
+        """
+        words = arg.split(' ')
+        if not words[0]:
+            print("** class name missing **")
+        elif words[0] not in storage.classes():
+            print("** class doesn't exist **")
+        else:
+            matches = [
+                k for k in storage.all() if k.startswith(
+                    words[0] + '.')]
+            print(len(matches))
 
     def emptyline(self):
         """Do nothing on an empty line."""
