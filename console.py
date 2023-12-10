@@ -15,17 +15,17 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
 
-    def default(self, line):
+    def default(self, arg):
         """Catch commands if nothing else matches then."""
-        # print("DEF:::", line)
-        self._precmd(line)
+        # print("DEF:::", arg)
+        self._precmd(arg)
 
-    def _precmd(self, line):
+    def _precmd(self, arg):
         """Intercepts commands to test for class.syntax()"""
-        # print("PRECMD:::", line)
-        match = re.search(r"^(\w*)\.(\w+)(?:\(([^)]*)\))$", line)
+        # print("PRECMD:::", arg)
+        match = re.search(r"^(\w*)\.(\w+)(?:\(([^)]*)\))$", arg)
         if not match:
-            return line
+            return arg
         classname = match.group(1)
         method = match.group(2)
         args = match.group(3)
@@ -87,7 +87,7 @@ class HBNBCommand(cmd.Cmd):
         elif arg not in storage.classes():
               print("** class doesn't exist **" )
         else:
-            b = storage.classes([args])
+            b = storage.classes()[arg]()
             b.save()
             print(b.id)
 
@@ -150,7 +150,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         rex = r'^(\S+)(?:\s(\S+)(?:\s(\S+)(?:\s((?:"[^"]*")|(?:(\S)+)))?)?)?'
-        match = re.search(rex, line)
+        match = re.search(rex, arg)
         classname = match.group(1)
         uid = match.group(2)
         attribute = match.group(3)
